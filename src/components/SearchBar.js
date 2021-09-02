@@ -1,5 +1,8 @@
 import React from 'react';
 
+    // inside of our searchBar component we created an uncontrolled form elemt
+    // we will turn an uncontrlled element to a controlled element
+
 class SearchBar extends React.Component {
     // this is to make sure text is changed on input when called
     // An HTML event can be something the browser does, 
@@ -9,11 +12,8 @@ class SearchBar extends React.Component {
     // An HTML input field was changed
     // An HTML button was clicked
     // (e) is event
+    state = { term: '' };
 
-    onInputChange(e) {
-        console.log(e.target.value)
-
-    }
 // ---------------------------------------------------------------//
     // The click() method simulates a mouse-click on an element.
     // This method can be used to execute a click on an element 
@@ -37,18 +37,39 @@ class SearchBar extends React.Component {
     // below in the onChange single line of code. The arrow function 
     // reperents the same thing as prior which is this.onInputChange
     // onChange={(e) => (e.target.value)}
+    // e.preventDefault() will stop the attemot to submit itself to the browser
+    // ---------------------------------------------------------------//
+
+    // TypeError: Cannot read property 'state' of undefined is stating
+    // JS for whatever reason thinks that 'this' is not equal to our searchbar class
+    // and is equal is equal to undefined
+    // 'this' is a refernce back to the class itself
+    // the value of 'this' is equal to the left of
+    // the dote(.) function that is called. You dont look at the function
+    // you look at where the function is called
+    // one solution would be: this.example = this.exmaple.bind(this)
+    // second solution would be: to ad = (e) => function to the function
+    // third solution would be: add => function directly into the onCHange
+    // and invoke with ()
+
+
+    onFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state.term)
+    }
 
     render() {
         return(
             <div className="ui segment">
-                <form className=" ui form">
+                <form onSubmit={this.onFormSubmit} className=" ui form">
                     <div className="field">
                         <label>Image Search </label>
                     </div>
                     
-                    <input type="text"
-                        
-                        onChange={this.onInputChange} />
+                    <input
+                        type="text"
+                        value={this.state.term}
+                        onChange={e => this.setState({ term: e.target.value })} />
                 </form>
             </div>
         )
