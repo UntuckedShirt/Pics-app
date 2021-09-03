@@ -4,8 +4,9 @@
 // semi colon at end should be removed
 
 import React from 'react';
-import axios from 'axios';
+import unsplash from '../api/unsplash'
 import SearchBar from './SearchBar';
+import ImageList from './ImageList'
 
 // you call axios by using axios.get
 // the get function takes 2 seperate function
@@ -31,8 +32,7 @@ import SearchBar from './SearchBar';
 class App extends React.Component { 
     state = { images: [] }
         onSeachSubmit = async (term) => {
-            const response = await axios
-            .get('/search/photos', {
+            const response = await unsplash.get('/search/photos', {
             params: { query: term },
             
        
@@ -45,7 +45,7 @@ class App extends React.Component {
         return (
             <div className="ui container" style={{ marginTop: '10px' }}>
                 <SearchBar onSubmit={this.onSeachSubmit} />
-                Found: {this.state.images.length} images
+                <ImageList images={this.state.images}/>
             </div>
         );
     }
