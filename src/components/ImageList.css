@@ -1,0 +1,25 @@
+/* the grid css system is used to lay out images
+// with this system we find some elemtn inside the DOM hieracy 
+// and give it a style of display grid and every elemtent will be 
+// layed out in that grid fashion */
+
+/* grid template columns creates a set number of columns, autofill 
+decides how many columns to auto fill and minmax decides the size
+fr meaning the maximum allocatoin of space */
+
+/* grid auto rows depicts how tall each of the diff 
+rows or cells will be */
+
+.image-list {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+grid-gap: 10px;
+grid-auto-rows: 150px;
+
+}
+
+.image-list img {
+width: 250px;
+grid-row-end: span 2;
+}
+ 

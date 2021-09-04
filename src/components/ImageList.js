@@ -5,15 +5,19 @@
 // the list of items are being rendered through images child and ImageList parent
 // image is mentioned multi times. we can refactor and condense that
 // find image arguement. then delete it and put () and {}
+// when adding ImageCard you no longer need to destructer with
+// description id and url. all you need is the image.id
 
-import React from 'react'
+import './ImageList.css';
+import React from 'react';
+import ImageCard from './ImageCard'
 
 const ImageList = props => {
-    const images = props.images.map(({description, id, urls}) => {
-        return <img alt={description} key={id} src={urls.regular} />
+    const images = props.images.map(image => {
+        return <ImageCard key={image.id} image={image} />;
     });
 
-    return <div>{images}</div>;
+    return <div className='image-list'>{images}</div>;
 
 }
 
